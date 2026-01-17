@@ -22,6 +22,7 @@ import { UserService } from './user.service';
       entities: [User],
 
       synchronize: true, 
+      dropSchema: true,
     }),
 
     TypeOrmModule.forFeature([User]),
