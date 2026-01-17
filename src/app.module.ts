@@ -3,15 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
 
-/*
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
-*/
+
 @Module({
   imports: [
     // TypeOrmModule.forRoot() connetcion GLOBAL
@@ -32,7 +27,8 @@ export class AppModule {}
     TypeOrmModule.forFeature([User]),
 
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  
+  controllers: [AppController, UserController],
+  providers: [AppService, UserService],
 })
 export class AppModule {}
