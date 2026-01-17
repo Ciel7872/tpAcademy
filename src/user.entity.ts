@@ -1,4 +1,3 @@
-//separate activity
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -8,9 +7,12 @@ export class User {
   id: number;
 
   @Column() 
-  name: string;
+  firstName: string;
 
-  @Column({ unique: true }) // UNIQUE in the db
+  @Column() 
+  lastName: string;
+
+  @Column({ unique: true }) 
   email: string;
 
   //isActive: boolean;

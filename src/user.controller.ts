@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, ParseIntPipe, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, ParseIntPipe, Param, Put, Delete, UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 //route
 @Controller('users') 
@@ -23,7 +24,7 @@ export class UserController {
   }
 
  
-  @Put(':id') // PUT /users/1
+  @Put(':id') // PUT   /users/1
   update(@Param('id', ParseIntPipe) id: number, @Body() user: User) {
     return this.userService.update(id, user);
   }
@@ -33,4 +34,13 @@ export class UserController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.userService.remove(id);
   }
+
+  @Post('upload')//  users/upload
+  @UseInterceptors(FileInterceptor('file')) // 'file' es el nombre del campo en el form-data
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('No se envió ningún archivo');
+    }
+  return this.userService.loadUsersFromFile(file);
+}
 }
