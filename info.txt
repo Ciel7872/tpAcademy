@@ -1,0 +1,1 @@
+One tip for good practices is to make small commits.
