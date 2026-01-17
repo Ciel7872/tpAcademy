@@ -1,0 +1,23 @@
+version: '3.8'  
+services:       
+  postgres:     
+    image: postgres:14-alpine
+    container_name: db_postgres 
+    
+    environment: 
+      POSTGRES_USER: adminClau
+      POSTGRES_PASSWORD: adminClau
+      POSTGRES_DB: tp_academy_db
+
+
+    #Connection: Windows port to Docker virtual Linux port
+    ports:
+      - '5432:5432' 
+      
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+
+volumes: 
+  postgres_data:
